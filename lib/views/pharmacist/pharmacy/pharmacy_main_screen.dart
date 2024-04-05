@@ -6,6 +6,7 @@ import 'package:ms_admin/views/pharmacist/pharmacy/side_bar_screens/category_scr
 import 'package:ms_admin/views/pharmacist/pharmacy/side_bar_screens/dashbord_screen.dart';
 import 'package:ms_admin/views/pharmacist/pharmacy/side_bar_screens/medecine_screen.dart';
 import 'package:ms_admin/views/pharmacist/pharmacy/side_bar_screens/upload_medecine_screen.dart';
+import 'package:ms_admin/widgets/pharmacy_name_widget.dart';
 
 enum SideBarItem {
   dashboard(
@@ -56,6 +57,8 @@ class PharmacyMainScreen extends ConsumerWidget {
     final sideBarkey = ValueKey(Random().nextInt(1000000));
     const String stringParam = 'String parameter';
     const int intParam = 1000000;
+    PharmacyNameWidget.enteredValue.value = pharmacyName;
+
     return AdminScaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

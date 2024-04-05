@@ -3,7 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PharmacyListWidget extends StatelessWidget {
-  PharmacyListWidget({Key? key}) : super(key: key);
+  final void Function(String)?
+      getPharmacyName; // Rendre le paramètre optionnel en ajoutant '?'
+
+  PharmacyListWidget({
+    Key? key,
+    this.getPharmacyName, // Utiliser un paramètre nommé
+  }) : super(key: key);
+
   final String pharmacistId = FirebaseAuth.instance.currentUser?.uid ?? '';
 
   @override
@@ -29,6 +36,12 @@ class PharmacyListWidget extends StatelessWidget {
           itemCount: snapshot.data!.size,
           itemBuilder: (context, index) {
             final pharmacyData = snapshot.data!.docs[index];
+            final pharmacyName = pharmacyData['name'] as String;
+
+            if (getPharmacyName != null) {
+              // Vérifier si la fonction est définie avant de l'appeler
+              getPharmacyName!(pharmacyName);
+            }
             return Card(
               child: ListTile(
                 title: Row(
